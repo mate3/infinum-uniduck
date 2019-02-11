@@ -43,19 +43,36 @@ $container = get_theme_mod( 'understrap_container_type' );
 					</header><!-- .page-header -->
 
 					<?php /* Start the Loop */ ?>
-					<?php while ( have_posts() ) : the_post(); ?>
+					<div class="container">
+						<div class="row">
+							<?php while ( have_posts() ) : the_post(); ?>
 
-						<?php
-						/**
-						 * Run the loop for the search to output the results.
-						 * If you want to overload this in a child theme then include a file
-						 * called content-search.php and that will be used instead.
-						 */
-						get_template_part( 'loop-templates/content', 'search' );
-						?>
+								<?php
+								/**
+								 * Run the loop for the search to output the results.
+								 * If you want to overload this in a child theme then include a file
+								 * called content-search.php and that will be used instead.
+								 */
+								//get_template_part( 'loop-templates/content', 'search' );
+								
+									echo '<div class="col-md-4">';
+									echo '<div class="article">';
+									echo '<div class="post-img">' . the_post_thumbnail('post-thumbnail', ['class' => 'img-fluid']) . '</div>';
+									echo '<div class="date">' . the_date() . '</div>';
+									echo '<div class="tags">' . the_tags('<ul><li>', '</li><li>', '</li></ul>') . '</div>';
+									
+									echo '<h2>' . get_the_title() . '</h2>';
+									echo '<div class="intro">' . the_excerpt() . '</div>';
+									echo '</div>';
+									echo '</div>';
+								
+								?>
 
-					<?php endwhile; ?>
 
+
+							<?php endwhile; ?>
+						</div>
+					</div>
 				<?php else : ?>
 
 					<?php get_template_part( 'loop-templates/content', 'none' ); ?>
@@ -68,7 +85,7 @@ $container = get_theme_mod( 'understrap_container_type' );
 			<?php understrap_pagination(); ?>
 
 			<!-- Do the right sidebar check -->
-			<?php get_template_part( 'global-templates/right-sidebar-check' ); ?>
+			<?php //get_template_part( 'global-templates/right-sidebar-check' ); ?>
 
 		</div><!-- .row -->
 

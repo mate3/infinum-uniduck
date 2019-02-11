@@ -9,6 +9,38 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
 
+// Function for Theme settings option page
+add_action('acf/init', 'my_acf_init');
+
+function my_acf_init() {
+	
+	if( function_exists('acf_add_options_page') ) {
+	
+		acf_add_options_page(array(
+			'page_title' 	=> 'Theme General Settings',
+			'menu_title'	=> 'Theme Settings',
+			'menu_slug' 	=> 'theme-general-settings',
+			'capability'	=> 'edit_posts',
+			'post_id' 		=> 'options',
+			'redirect'		=> true,
+		));
+		
+		acf_add_options_sub_page(array(
+			'page_title' 	=> 'Theme Header Settings',
+			'menu_title'	=> 'Header',
+			'parent_slug'	=> 'theme-general-settings',
+		));
+		
+		acf_add_options_sub_page(array(
+			'page_title' 	=> 'Theme Footer Settings',
+			'menu_title'	=> 'Footer',
+			'parent_slug'	=> 'theme-general-settings',
+		));
+		
+	}
+	
+}
+
 $understrap_includes = array(
 	'/theme-settings.php',                  // Initialize theme default settings.
 	'/setup.php',                           // Theme setup and custom theme supports.
@@ -33,3 +65,92 @@ foreach ( $understrap_includes as $file ) {
 	}
 	require_once $filepath;
 }
+
+
+
+
+
+//Excerpt length
+function custom_excerpt_length( $length ) {
+	return 33;
+}
+add_filter( 'excerpt_length', 'custom_excerpt_length', 999 );
+
+//Excerpt read more
+function understrap_all_excerpts_get_more_link( $post_excerpt ) {
+
+	return $post_excerpt . '... <a class="moretag" href="'. get_permalink( get_the_ID() ) . '"> Read more </a>';
+
+}
+add_filter( 'wp_trim_excerpt', 'understrap_all_excerpts_get_more_link' );
+
+
+/******** Subscription form *********/
+class Subscription_Widget extends WP_Widget {
+	/**
+	* To create the example widget all four methods will be 
+	* nested inside this single instance of the WP_Widget class.
+	**/
+	public function __construct() {
+		$widget_options = array( 
+		'classname' => 'sub_widget',
+		'description' => 'Subscription Widget',
+		);
+		parent::__construct( 'sub_widget', 'Subscription Widget', $widget_options );
+	}
+
+	public function widget( $args, $instance ) {
+	$title = apply_filters( 'widget_title', $instance[ 'title' ] );
+	$blog_title = get_bloginfo( 'name' );
+	$tagline = get_bloginfo( 'description' );
+	echo  $args['before_widget'] . $args['before_title'] . $title . $args['after_title'] ; ?>
+
+	<div class="subscription">
+		<input type="text" class="input_mail" placeholder="Input your e-mail address">
+		<button type="button" class="btn input_btn" >Subscribe</button>
+	</div>
+
+	<?php echo $args['after_widget'];
+	}
+
+	public function form( $instance ) {
+		$title = ! empty( $instance['title'] ) ? $instance['title'] : ''; ?>
+		<p>
+		  <label for="<?php echo $this->get_field_id( 'title' ); ?>">Title:</label>
+		  <input type="text" id="<?php echo $this->get_field_id( 'title' ); ?>" name="<?php echo $this->get_field_name( 'title' ); ?>" value="<?php echo esc_attr( $title ); ?>" />
+		</p><?php 
+	  }
+	  
+
+  }
+
+  function subscribe_widget() { 
+	register_widget( 'Subscription_Widget' );
+  }
+  add_action( 'widgets_init', 'subscribe_widget' );
+  
+
+/******** Shortcode *********/
+// Add Shortcode
+function quote_block( $atts , $content = null ) {
+
+	// Attributes
+	$atts = shortcode_atts(
+		array(
+			'direction' => 'right',
+		),
+		$atts,
+		'qb'
+	);
+	return '<div class="quote_block ' . $atts[direction] . '">' . do_shortcode($content) . "</div>";
+	
+}
+add_shortcode( 'qb', 'quote_block' );
+
+
+function quote( $atts , $content = null ) {
+
+	return '<div="quote">' . $content . '</div>';
+
+}
+add_shortcode( 'q', 'quote' );

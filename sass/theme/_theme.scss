@@ -1,1 +1,256 @@
 // This is an empty scss file for your custom styles - Please add your super duper awesome mega design styles here
+
+@font-face {
+    font-family: 'Museo Sans';
+    font-style: normal;
+    font-weight: 100;
+    src: local('Museo Sans'),
+         url('../fonts/MuseoSansRounded-300.otf') format("opentype");
+}
+@font-face {
+    font-family: 'Museo Sans';
+    font-style: normal;
+    font-weight: 300;
+    src: local('Museo Sans'),
+         url('../fonts/MuseoSansRounded-300.otf') format("opentype");
+}
+@font-face {
+    font-family: 'Museo Sans';
+    font-style: normal;
+    font-weight: 700;
+    src: local('Museo Sans'),
+         url('../fonts/MuseoSansRounded-700.otf') format("opentype");
+}
+
+body{
+    background: $white;
+    font-family: 'Museo Sans', sans-serif;
+    font-weight: 300;
+    color: $grey;
+}
+.home{
+    h1{
+        font-size: 38px;
+        font-weight: 100;
+        text-align: center;
+        color: $primary;
+        
+    }
+    .heading{
+        padding: 80px 0;
+    }
+    input{
+        border: none;
+    }
+}
+p{
+    background: $white;
+}
+h2 a{
+    color: $red;
+}
+
+/*************************
+
+        HEADER
+
+*************************/
+#main-menu{
+    align-items: center;
+    .ios-btn{
+        text-transform: uppercase;
+        background: $primary;
+        border-radius: 3px;
+        padding: 15px 30px;
+        margin-left: 20px;
+        a{
+            color: $white;
+            position: relative;
+            padding-left: 25px;
+            padding-right: 0;
+        }
+        a:before{
+            content: url(../img/icons/ic-apple.svg);
+            left: 0;
+            position: absolute;
+        }
+    }
+    .unicorn-btn{
+        background: #b3b3b3;
+        border-radius: 3px;
+        padding: 15px 30px;
+        margin-left: 20px;
+        a{
+            color: $white;
+            position: relative;
+            padding-left: 25px;
+            padding-right: 0;
+        }
+        a:before{
+            content: url(../img/icons/ic-unicorn.svg);
+            left: 0;
+            position: absolute;
+        }
+    }
+}
+
+/*************************
+
+        HOMEPAGE
+
+*************************/
+.main-loop.article{
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    padding: 30px 0;
+}
+.date{
+    color: #a9a9a9;
+    font-size: 14px;
+    padding: 15px 0;
+}
+.title-link{
+    color: $grey;
+    transition: all 0.2s ease;
+    text-decoration: none;
+}
+.title-link:hover,
+.title-link:active{
+    color: $primary;
+    text-decoration: none;
+}
+.intro{
+    margin-bottom: auto;
+}
+.moretag{
+    text-decoration: none;
+}
+.tags{
+    padding: 15px 0;
+    ul{
+        list-style: none;
+        padding-left: 0;
+        margin-bottom: 0;
+        li{
+            display: inline-block;
+        }
+        a{
+            display: inline-block;
+            font-size: 12px;
+            background: #f0f0f0;
+            color: #999999;
+            padding: 5px 10px;
+            border-radius: 3px;
+            margin-right: 5px;
+            transition: all 0.2s ease;
+            text-decoration: none;
+        }
+        a:hover,a:active{
+            background: #f2c0de;
+            color: $primary;
+        }
+        
+    }
+}
+.comments{
+    margin-top: auto;
+    padding-top: 20px;
+    .fav,.com{
+        position: relative;
+        padding-left: 25px;  
+        padding-right: 30px;
+    }
+    .fav:before{
+        content: url(../img/icons/ic-heart.svg);
+        left: 0;
+        position: absolute;
+    }
+    .com:before{
+        content: url(../img/icons/ic-comment.svg);
+        left: 0;
+        position: absolute;
+    }
+}
+
+
+/*************************
+
+        WIDGET
+
+*************************/
+#wrapper-footer-full{
+    background: $white;
+}
+.footer-widget h3{
+    color: #858585;
+    font-size: 36px;
+    text-align: center;
+    padding-bottom: 50px;
+}
+.subscription{
+    text-align: center;
+    padding-bottom: 50px;
+    input{
+        max-width: 460px;
+        width: 100%;
+        border: 1px solid #d8d8d8;
+        border-radius: 3px;
+        padding: 15px;
+        margin-bottom: 15px;
+    }
+    button{
+        text-transform: uppercase;
+        color: $white;
+        background: $primary;
+        border-radius: 3px;
+        padding: 15px 40px;
+        margin-left: 15px;
+    }
+}
+/*************************
+
+        FOOTER
+
+*************************/
+footer{
+    background: #f4f4f4;
+    padding: 70px 0 70px;
+    border-top: 1px solid #d8d8d8;
+}
+.copyright {
+    img{
+        margin-bottom: 20px;
+    }
+}
+.social{
+    ul{
+        list-style: none;
+    }
+    ul li{
+        position: relative;
+        padding-right: 30px;
+        padding-bottom: 15px;
+    }
+    .fb::after{
+        content: url(../img/icons/ic-facebook.svg);
+        position: absolute;
+        right: 0;
+        top: 2px;
+    }
+    .tw::after{
+        content: url(../img/icons/ic-twitter.svg);
+        position: absolute;
+        right: 0;
+        top: 2px;
+    }
+    .in::after{
+        content: url(../img/icons/ic-instagram.svg);
+        position: absolute;
+        right: 0;
+        top: 2px;
+    }
+    a{
+        color: $primary;
+    }
+}

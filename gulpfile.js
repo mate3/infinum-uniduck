@@ -16,6 +16,7 @@ var cleanCSS = require( 'gulp-clean-css' );
 var gulpSequence = require( 'gulp-sequence' );
 var replace = require( 'gulp-replace' );
 var autoprefixer = require( 'gulp-autoprefixer' );
+const chmod = require('gulp-chmod');
 
 // Configuration file to keep your code DRY
 var cfg = require( './gulpconfig.json' );
