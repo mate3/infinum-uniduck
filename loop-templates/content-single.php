@@ -11,25 +11,12 @@ if ( ! defined( 'ABSPATH' ) ) {
 ?>
 
 <article <?php post_class(); ?> id="post-<?php the_ID(); ?>">
-
-	<header class="entry-header">
-
-		<?php the_title( '<h1 class="entry-title">', '</h1>' ); ?>
-
-		<div class="entry-meta">
-
-			<?php understrap_posted_on(); ?>
-
-		</div><!-- .entry-meta -->
-
-	</header><!-- .entry-header -->
-
-	<?php echo get_the_post_thumbnail( $post->ID, 'large' ); ?>
-
+<div class="col">
 	<div class="entry-content">
-
-		<?php the_content(); ?>
-
+		
+		<div class="single-container">
+			<?php the_content(); ?>
+		</div>
 		<?php
 		wp_link_pages(
 			array(
@@ -40,11 +27,22 @@ if ( ! defined( 'ABSPATH' ) ) {
 		?>
 
 	</div><!-- .entry-content -->
-
+</div>
 	<footer class="entry-footer">
-
-		<?php understrap_entry_footer(); ?>
-
+		<div class="container">
+			<div class="single-container">
+				<div class="tags">
+					<?php $tags = get_the_tags();
+					if ($tags) {
+						echo '<ul>';
+							foreach($tags as $tag) {
+							echo '<li><a href="' . get_tag_link($tag->term_id) . '">' . $tag->name . '</a></li>'; 
+							}
+						echo '</ul>';
+					} ?>
+				</div>	
+			</div>
+		</div>	
 	</footer><!-- .entry-footer -->
 
 </article><!-- #post-## -->

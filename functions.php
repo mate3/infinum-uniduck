@@ -72,7 +72,7 @@ foreach ( $understrap_includes as $file ) {
 
 //Excerpt length
 function custom_excerpt_length( $length ) {
-	return 33;
+	return (is_front_page()) ? 33 : 12;
 }
 add_filter( 'excerpt_length', 'custom_excerpt_length', 999 );
 
@@ -131,18 +131,17 @@ class Subscription_Widget extends WP_Widget {
   
 
 /******** Shortcode *********/
-// Add Shortcode
 function quote_block( $atts , $content = null ) {
 
 	// Attributes
-	$atts = shortcode_atts(
+	$atributes = shortcode_atts(
 		array(
 			'direction' => 'right',
 		),
 		$atts,
 		'qb'
 	);
-	return '<div class="quote_block ' . $atts[direction] . '">' . do_shortcode($content) . "</div>";
+	return '<div class="quote_block ' . $atributes['direction'] . '">' . do_shortcode($content) . "</div>";
 	
 }
 add_shortcode( 'qb', 'quote_block' );
@@ -150,7 +149,17 @@ add_shortcode( 'qb', 'quote_block' );
 
 function quote( $atts , $content = null ) {
 
-	return '<div="quote">' . $content . '</div>';
+	return '<div class="quote">' . $content . '</div>';
 
 }
 add_shortcode( 'q', 'quote' );
+
+function image_wrap( $atts , $content = null ) {
+
+	return '<div class="img">' . $content . '</div>';
+
+}
+add_shortcode( 'img', 'image_wrap' );
+
+//remove_filter( 'the_content', 'wpautop' );
+

@@ -139,13 +139,16 @@ if ( $the_query_sticky->have_posts() ) {
             echo '<div class="comments"> <span class="fav">17 faves</span> <span class="com">22 comments</span> </div>';
             echo '</div> </div>';
 
-	}
+    }
+    
 	/* Restore original Post Data */
-	wp_reset_postdata();
+    wp_reset_postdata();
+    understrap_pagination();
 } else {
 	// no posts found
 }
 ?>
+
     </div>
 </div>
 <?php
