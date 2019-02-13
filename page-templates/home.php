@@ -46,8 +46,8 @@ $h_title = get_field('homepage_title', 'options');
         </div>
     </div>
 </header>
-<div class="container">
-    <div class="row">
+<div class="container ">
+    <div class="row posts-container">
 <?php
 $sticky = get_option( 'sticky_posts' );
 $args_sticky = array(
@@ -65,13 +65,14 @@ $args_sticky = array(
 $args = array(
     'post_type' => 'post',
     'order'   => 'ASC',
-    'posts_per_page' => 6,
+    //'posts_per_page' => 6,
     'post__not_in' => $sticky
 );
 
 // The Query
 $the_query = new WP_Query( $args );
 $the_query_sticky = new WP_Query( $args_sticky );
+$max = $the_query->max_num_pages;
 $have_featured = false;
 // The Loop
 if ( $the_query_sticky->have_posts() ) {
@@ -82,7 +83,7 @@ if ( $the_query_sticky->have_posts() ) {
         $featured = get_field('featured_post');
 
         //if($have_featured == false && $featured==true){
-            echo '<div class="col-md-12"><div class="article main-loop">';
+            echo '<div class="col-md-12"><div class="article main-loop reveal">';
             echo '<div class="row">';
             echo '<div class="col-md-6"><div class="post-img">';
             echo the_post_thumbnail('post-thumbnail', ['class' => 'img-fluid']) ;
@@ -116,7 +117,7 @@ if ( $the_query_sticky->have_posts() ) {
                 $tags = get_the_tags();
 
 
-            echo '<div class="col-md-4"><div class="article main-loop">';
+            echo '<div class="col-md-4"><div class="article main-loop reveal">';
             echo '<div class="post-img">';
             echo the_post_thumbnail('post-thumbnail', ['class' => 'img-fluid']) ;
             echo '</div>';
@@ -143,13 +144,22 @@ if ( $the_query_sticky->have_posts() ) {
     
 	/* Restore original Post Data */
     wp_reset_postdata();
-    understrap_pagination();
+
 } else {
 	// no posts found
 }
 ?>
-
+        
     </div>
 </div>
-<?php
+<div class="container">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="load-more-secion text-center">
+                <a class="btn load-more" data-page="1" data-url="<?php echo admin_url('admin-ajax.php');?>"> <span class="text">Load More</span></a>
+            </div>
+        </div>
+    </div>    
+</div>    
+        <?php
 get_footer();
