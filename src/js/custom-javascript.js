@@ -37,3 +37,17 @@ jQuery(document).on('click','.load-more', function(){
     
 
 });
+
+/* Animation */
+var title = jQuery('h1');
+console.log(title);
+jQuery(document).ready(function(){
+var tl = new TimelineLite();
+tl.from(".cover", 1, {scaleY:0, transformOrigin:"left top"})
+  .to(".cover", 1, {scaleY:0, transformOrigin:"left bottom"}, "reveal")
+  .from(".img-anim", 1, {opacity:0}, "reveal")
+  .staggerFromTo(title, 0.5, 
+    {y: -100, autoAlpha: 0}, 
+    {y: 0, autoAlpha: 1, ease:Power1.easeInOut},
+    0.2);;
+});

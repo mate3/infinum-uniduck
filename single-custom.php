@@ -1,9 +1,11 @@
 <?php
-/**
- * The template for displaying all single posts.
- *
- * @package understrap
+/*
+ * Template Name: Custom Article
+ * Template Post Type: post, page, product
  */
+  
+ get_header();  
+
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
@@ -15,18 +17,20 @@ $container = get_theme_mod( 'understrap_container_type' );
 $thumb = wp_get_attachment_image_src( get_post_thumbnail_id($post->ID), 'full' );
 $intro = get_field('post_intro');
 ?>
-
-<div class="wrapper" id="single-wrapper">
+<div class="wrapper custom-single" id="single-wrapper">
 	<?php while ( have_posts() ) : the_post(); ?>
 		<header>
 			<div class="header-bg" style="background-image: url('<?php echo $thumb['0'];?>')">
-				<div class="<?php echo esc_attr( $container ); ?>">
+				<!--<div class="<?php //echo esc_attr( $container ); ?>">-->
 					<div class="heading-content">
+						<div class="img-wrapper">
+							<img class="img-anim" src="<?php echo $thumb['0'];?>" alt="">
+							<div class="cover"></div>
+						</div>
 						<?php the_title( '<h1 class="entry-title">', '</h1>' ); ?>
-						<div class="author"><?php echo get_the_author(); ?></div> 
 					</div>
-					<div class="text-center btb"><a href="<?= get_home_url()?>">Back to blog</a></div>
-				</div>
+					<!--<div class="text-center btb"><a href="<?= get_home_url()?>">Back to blog</a></div>
+				</div>-->
 			</div>
 		</header>
 
@@ -76,5 +80,4 @@ $intro = get_field('post_intro');
 		</div><!-- #content -->
 	<?php endwhile; // end of the loop. ?>
 </div><!-- #single-wrapper -->
-
 <?php get_footer(); ?>
